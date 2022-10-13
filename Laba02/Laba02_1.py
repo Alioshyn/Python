@@ -19,5 +19,5 @@ for i in range(n):
     if A[i] > maxOdd and A[i] % 2 != 0:
         maxOdd = A[i]
 
-print("Наибольший нечетный элемент - ", maxOdd)
-print("Минимальный по модулю элемент списка - ", minAbs)
+print(f"Наибольший нечетный элемент {maxOdd}")
+print(f"Минимальный по модулю элемент списка - {minAbs}")
