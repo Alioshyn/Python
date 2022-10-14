@@ -13,10 +13,29 @@ import datetime
 now = datetime.datetime.now()
 
 class Car:
+
     car_list = []
 
     def get_car_id(self):
         return self.__car_id
+
+    def get_car_brand(self):
+        return self.__car_brand
+
+    def get_car_model(self):
+        return self.__car_model
+
+    def get_car_year(self):
+        return self.__car_year
+
+    def get_car_color(self):
+        return self.__car_color
+
+    def get_car_price(self):
+        return self.__car_price
+
+    def get_car_regnumber(self):
+        return self.__car_regnumber
 
     def set_car_id(self, car_id):
         if not self.is_car_id_exist(car_id):
@@ -35,38 +54,20 @@ class Car:
         else:
             return False
 
-    def get_car_brand(self):
-        return self.__car_brand
-
     def set_car_brand(self, car_brand):
         self.__car_brand = car_brand
-
-    def get_car_model(self):
-        return self.__car_model
 
     def set_car_model(self, car_model):
         self.__car_model = car_model
 
-    def get_car_year(self):
-        return self.__car_year
-
     def set_car_year(self, car_year):
         self.__car_year = car_year
-
-    def get_car_color(self):
-        return self.__car_color
 
     def set_car_color(self, car_color):
         self.__car_color = car_color
 
-    def get_car_price(self):
-        return self.__car_price
-
     def set_car_price(self, car_price):
         self.__car_price = car_price
-
-    def get_car_regnumber(self):
-        return self.__car_regnumber
 
     def set_car_regnumber(self, car_regnumber):
         self.__car_regnumber = car_regnumber
@@ -105,7 +106,7 @@ class Car:
     def find_car_by_brand(cls, brand_name):
         flag = False
         for i in range(len(cls.car_list)):
-            if brand_name.casefold() in cls.car_list[i].car_brand.casefold():
+            if brand_name.casefold() in cls.car_list[i].__car_brand.casefold():
                 print(cls.car_list[i])
                 flag = True
         if flag == False:
@@ -115,7 +116,7 @@ class Car:
     def find_car_by_model(cls, model, year):
         flag = False
         for i in range(len(cls.car_list)):
-            if model.casefold() in cls.car_list[i].car_model.casefold() and cls.car_list[i].car_year < (now.year - year):
+            if model.casefold() in cls.car_list[i].__car_model.casefold() and cls.car_list[i].__car_year < (now.year - year):
                 print(cls.car_list[i])
                 flag = True
         if flag == False:
@@ -195,11 +196,11 @@ while option != 0:
         print('\nСписок авто: ')
         Car.print_car_list()
     elif option == 4:
-        findbrand = input('\nВведите марку авто: ')
+        findbrand = input('Введите марку авто: ')
         Car.find_car_by_brand(findbrand)
     elif option == 5:
-        findmodel = input('\nВведите модель авто: ')
-        findyear =  int(input('\nВведите возраст авто: '))
+        findmodel = input('Введите модель авто: ')
+        findyear =  int(input('Введите возраст авто: '))
         Car.find_car_by_model(findmodel, findyear)
     elif option == 6:
         add_new_cars()
