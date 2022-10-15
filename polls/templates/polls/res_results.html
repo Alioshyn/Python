@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    <title>Результаты голосования</title>
+</head>
+<body>
+<h1>{{ question.question_text }}</h1>
+
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} -- голосов: {{ choice.votes }}  </li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'polls:detail' question.id %}">Проголосовать заново?</a>
+</body>
+</html>

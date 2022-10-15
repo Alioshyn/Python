@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <title>Голосовалка</title>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <h1 class="mt-2">Голосование</h1>
+            {% if user.is_authenticated %}
+                <p class="text-right">
+                    Привет, {{ user.username }}!
+                    <a href="/polls/logout">Log out</a> |
+                    <a href="/polls/password-change">
+                        Change password
+                    </a>
+                </p>
+            {% else %}
+                <p class="text-right">
+                    <a href="/polls/login">Log in</a> |
+                    <a href="/polls/register">Register</a>
+                </p>
+            {% endif %}
+            <hr class="mt-0 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{% url 'polls:vote' question.id %}" method="post">
+                    {% csrf_token %}
+                    <fieldset>
+                        <legend><h4>{{ question.question_text }}</h4></legend>
+                        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                        {% for choice in question.choice_set.all %}
+                            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                        {% endfor %}
+                    </fieldset>
+                    <input type="submit" value="Голосовать!">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
