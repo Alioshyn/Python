@@ -85,6 +85,7 @@ class RegisterFormView(FormView):
         # Вызываем метод базового класса
         return super(RegisterFormView, self).form_valid(form)
 
+
 class LoginFormView(FormView):
     # будем строить на основе
     # встроенной в django формы входа
